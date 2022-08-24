@@ -1,0 +1,41 @@
+<button *ngIf="isLoggedIn"><a (click)="onLogoutClick()">Logout</a><br/></button>
+
+<h2 class = "titel">Add a new album</h2>
+<form #albumForm="ngForm" (ngSubmit)="onSubmit(albumForm)">
+        <label class = "textEtt">Name: </label>
+        <input type="text"
+        [(ngModel)]="dummy.RecordName" name="RecordName" #RecordName="ngModel"
+        required minlength="3"
+        [ngClass]="{'error': RecordName.errors && RecordName.touched}"/>
+        <span class = "textEtt" *ngIf="(RecordName.dirty || RecordName.touched) && RecordName.hasError('required')">
+        * The album needs a name </span>
+        <span class = "textEtt" *ngIf="(RecordName.dirty || RecordName.touched) && RecordName.hasError('minlength')">
+        * The name needs to be atleast three characters </span>
+        <br/>
+        
+        <label class = "textEtt">Release Year: </label>
+        <input type="text" 
+        [(ngModel)]="dummy.ReleaseYear" name="ReleaseYear" #ReleaseYear="ngModel"
+        required
+        minlength="4" 
+        maxlength="4"
+        [ngClass]="{'error': ReleaseYear.errors && ReleaseYear.touched}"/>
+        <span class = "textEtt" *ngIf="(ReleaseYear.dirty || ReleaseYear.touched) && ReleaseYear.hasError('required')">
+        * The album needs a release year </span>
+        <span class = "textEtt" *ngIf="(ReleaseYear.dirty || ReleaseYear.touched) && ReleaseYear.hasError('minlength')">
+        * The release year needs to be four digits </span>
+        <span class = "textEtt" *ngIf="(ReleaseYear.dirty || ReleaseYear.touched) && ReleaseYear.hasError('maxlength')">
+        * The release year needs to be four digits </span>
+        <br/>
+        
+        <label class = "textEtt">Number of songs: </label>
+        <input type="text"
+        [(ngModel)]="dummy.NumberOfSongs" name="NumberOfSongs" #NumberOfSongs="ngModel"
+        required
+        [ngClass]="{'error': NumberOfSongs.errors && NumberOfSongs.touched}"/>
+        <span class = "textEtt" *ngIf="(NumberOfSongs.dirty || NumberOfSongs.touched) && NumberOfSongs.hasError('required')">
+        * The album needs tracks </span>
+        <br/><br/>
+        
+        <button [disabled]="!albumForm.form.valid">Add album</button>
+</form>
